@@ -11,9 +11,15 @@ body {
     height: 100vh;
 }
 
-
 .invisible {
     display: none;
+}
+
+.headFindAnswer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .head {
@@ -48,10 +54,25 @@ body {
     padding: 10px;
 }
 
+.findAnswer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 80px;
+    border-style: double;
+    border-radius: 10px;
+    border-color: darkgoldenrod;
+    width: 600px;
+    height: 300px;
+    padding: 10px;
+}
+
 .span {
     font-style: oblique;
     color: darkgoldenrod;
     font-size: 25px;
+    white-space: pre;
 }
 
 .span:hover{
@@ -85,7 +106,6 @@ body {
 .buttonSwitch {
     height: 70px;
     width: 70px;
-    margin: 20px;
     border-radius: 30px;
     position: absolute;
     top: 10px;
@@ -101,7 +121,7 @@ body {
 
 .input {
     height: 30px;
-    width: 800px;
+    width: 90%;
     margin: 20px;
     border-style: double;
     border-radius: 10px;
@@ -145,4 +165,8 @@ body {
 
 .resultItem:hover{
     text-decoration: underline;
+}
+
+.list {
+    background-color: #97AABD;
 }

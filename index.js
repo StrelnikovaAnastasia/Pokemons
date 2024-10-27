@@ -26,9 +26,6 @@ class Pokemons extends HTMLElement {
 
         this.br = $.createElement("br");
 
-        // this.footer = $.createElement("footer");
-        // this.footer.classList.add("footer");
-
         this.search = $.createElement("form");
         this.search.classList.add("form", "invisible");
 
@@ -51,64 +48,68 @@ class Pokemons extends HTMLElement {
         this.inputSearchLabel = $.createElement("label");
         this.inputSearch = $.createElement("input");
         this.inputSearch.classList.add("input");
-
-        this.buttonFindLabel = $.createElement("label");
-        this.buttonFind = $.createElement("button");
-        this.buttonFind.classList.add("button", "buttonSearch");
-        this.buttonFind.textContent = "Найти";
+        this.inputSearch.placeholder = "поиск..."
 
         this.error = $.createElement("div");
+
+        this.findAnswer = $.createElement("form");
+        this.findAnswer.classList.add("findAnswer", "hidden");
+
+        this.headFindAnswer = $.createElement("div");
+        this.headFindAnswer.classList.add("headFindAnswer");
+
+        this.headFindAnswer__header = $.createElement("header");
+        this.headFindAnswer__header.classList.add("header");
+
+        this.brFind = $.createElement("br");
+
+        this.headFindAnswer__span = $.createElement("span");
+        this.headFindAnswer__span.classList.add("span");
+
+        this.imgFindAnswer = $.createElement("img");
+        this.imgFindAnswer.classList.add("img");
 
         this.divForm.appendChild(this.form);
         this.divForm.appendChild(this.search);
         this.divForm.appendChild(this.list);
+        this.divForm.appendChild(this.findAnswer);
+
         this.form.appendChild(this.head);
         this.head.appendChild(this.header);
         this.head.appendChild(this.buttonSearchLabel);
         this.buttonSearchLabel.appendChild(this.buttonSearch);
         this.form.appendChild(this.cards);
         this.form.appendChild(this.br);
-        //this.form.appendChild(this.footer);
         this.header.appendChild(this.h2);
-        // this.footer.appendChild(this.btn);
-        // this.btn.appendChild(this.buttonListLabel);
-        // this.buttonListLabel.appendChild(this.buttonList);
-        // this.btn.appendChild(this.buttonSearchLabel);
-        // this.buttonSearchLabel.appendChild(this.buttonSearch);
         this.search.appendChild(this.headSearch);
         this.search.appendChild(this.brSearch);
         this.headSearch.appendChild(this.titleSearch);
         this.headSearch.appendChild(this.buttonListLabel);
         this.buttonListLabel.appendChild(this.buttonList);
+
         this.search.appendChild(this.inputSearchLabel);
-        this.search.appendChild(this.buttonFindLabel);
         this.search.appendChild(this.error);
-        //this.search.appendChild(this.footer);
+        this.search.appendChild(this.list);
+        this.search.appendChild(this.findAnswer);
         this.inputSearchLabel.appendChild(this.inputSearch);
-        this.buttonFindLabel.appendChild(this.buttonFind);
+
+        this.findAnswer.appendChild(this.headFindAnswer);
+        this.findAnswer.appendChild(this.imgFindAnswer);
+        this.headFindAnswer.appendChild(this.headFindAnswer__header);
+        this.headFindAnswer.appendChild(this.brFind);
+        this.headFindAnswer.appendChild(this.headFindAnswer__span);
 
         $.body.appendChild(this.divForm);
 
-        // changeVisible(this.buttonList,this.form.classList,this.search);
-        // changeVisible(this.buttonSearch,this.search.classList,this.form);
+        changeVisible(this.buttonList, this.form, this.search);
+        changeVisible(this.buttonSearch, this.search, this.form);
 
-        this.buttonList.addEventListener("click", () => {
-            this.form.classList.remove("invisible");
-            this.search.classList.add("invisible");
-        })
-
-        this.buttonSearch.addEventListener("click", () => {
-            this.search.classList.remove("invisible");
-            this.form.classList.add("invisible");
-
-        })
     }
 
     async getPokemons() {
         const pokemons = [];
         let data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
         let results = data.results;
-        console.log(results);
         for (let poke of results) {
             let promise = await fetch(poke.url).then(res => res.json());
             pokemons.push(promise);
@@ -127,7 +128,7 @@ class Pokemons extends HTMLElement {
             const span = document.createElement("span");
             span.classList.add("span");
             card.classList.add("card");
-            card.id = id;
+            card.id = ++id;
             this.cards.appendChild(card);
             card.appendChild(span);
             card.appendChild(img);
@@ -138,10 +139,10 @@ class Pokemons extends HTMLElement {
 
 }
 
-const changeVisible = (button, delet, add) => {
+const changeVisible = (button, remove, add) => {
     button.addEventListener("click", () => {
+        remove.classList.remove("invisible");
         add.classList.add("invisible");
-        delet.classList.remove("invisible");
     })
 }
 
@@ -149,12 +150,9 @@ customElements.define("my-element", Pokemons);
 myElement = document.createElement("my-element");
 document.body.appendChild(myElement);
 
-const isWords = (str) => /^[a-zA-Z]*$/.test(str);
-
 document.addEventListener("submit", (e) => { e.preventDefault() });
 
 document.addEventListener('DOMContentLoaded', async function () {
-
     await myElement.createPokemonCards();
 
     const content = document.querySelector('.cards');
@@ -182,7 +180,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             const pageButton = document.createElement('button');
             pageButton.textContent = i + 1;
             pageButton.addEventListener('click', () => {
-                pageButton.classList.add("active");
                 currentPage = i;
                 showPage(currentPage);
                 window.scrollTo(0, 0);
@@ -209,50 +206,51 @@ document.addEventListener('DOMContentLoaded', async function () {
     showPage(currentPage);
 });
 
+const clean = () => {
+    myElement.list.innerHTML = "";
+    myElement.error.innerHTML = "";
+    myElement.findAnswer.classList.add("hidden");
+}
+
 myElement.inputSearch.addEventListener("input", () => {
     const value = myElement.inputSearch.value.trim();
     if (value.length < 3) {
-        myElement.list.innerHTML = "";
-        myElement.error.innerHTML = "";
+        clean();
         return;
     }
     setList(myElement.pokemons);
 
     function setList(results) {
-        myElement.list.innerHTML = "";
-        myElement.error.innerHTML = "";
-        const cardPokemon = Array.from(document.querySelector(".cards").getElementsByClassName("card"));
+        clean();
+        let flag = false;
         for (const pokemon of results) {
             const name = pokemon.name.trim();
             myElement.list.classList.remove("invisible");
-            if (!value || !isWords(value)) {
-                const errorItem = document.createElement("span");
-                errorItem.classList.add("error");
-                errorItem.textContent = "Ничего не найдено, убедитесь, что вы пишите на английском";
-                myElement.error.appendChild(errorItem);
-            }
             if (name.includes(value)) {
                 myElement.error.innerHTML = "";
+                myElement.findAnswer.classList.add("hidden");
                 const resultItem = document.createElement("li");
                 resultItem.classList.add("resultItem");
                 resultItem.textContent = name;
                 myElement.list.appendChild(resultItem);
-                resultItem.addEventListener("click", ()=> {
-                    let index;
-                    cardPokemon.forEach(item => {
-                        const names = item.getElementsByTagName("span");
-                        const name = names[0].textContent;
-                        const id = item.id;
-                        if(resultItem.textContent === name) {
-                            console.log(id)
-                            index = id;
-                        }
-                    })
-                    myElement.search.appendChild(document.getElementById(index));
+                resultItem.addEventListener("click", async () => {
+                    myElement.findAnswer.classList.remove("hidden");
+                    let infoPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`).then(res => res.json());
+                    myElement.headFindAnswer__header.textContent = infoPokemon.name;
+                    myElement.headFindAnswer__span.textContent = "base experience: " + infoPokemon.base_experience
+                        + '\r\n' + "weight: " + infoPokemon.weight;
+                    myElement.imgFindAnswer.src = infoPokemon.sprites.front_default;
                 })
+                flag = true;
             }
-    
         }
+        if (!flag) {
+            const errorItem = document.createElement("span");
+            errorItem.classList.add("error");
+            errorItem.textContent = "Ничего не найдено, убедитесь, что вы пишите на английском";
+            myElement.error.appendChild(errorItem);
+        }
+
     }
 })
 
