@@ -1,0 +1,148 @@
+body {
+    background-color: #2F4454;
+}
+
+#div_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.invisible {
+    display: none;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.header {
+    color: darkgoldenrod;
+    text-align: center;
+    font-size: 30px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 80px;
+    border-style: double;
+    border-radius: 10px;
+    border-color: darkgoldenrod;
+    width: 370px;
+    height: 370px;
+    padding: 10px;
+}
+
+.span {
+    font-style: oblique;
+    color: darkgoldenrod;
+    font-size: 25px;
+}
+
+.span:hover{
+    text-decoration: underline;
+}
+
+.img {
+    width: 300px;
+    height: 300px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #19181A;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.button {
+    background-color:#97AABD;
+    color: #19181A;
+}
+
+.buttonSwitch {
+    height: 70px;
+    width: 70px;
+    margin: 20px;
+    border-radius: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.buttonSearch {
+    height: 40px;
+    width: 60px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.input {
+    height: 30px;
+    width: 800px;
+    margin: 20px;
+    border-style: double;
+    border-radius: 10px;
+    border-color: darkgoldenrod;
+}
+
+.active {
+    background-color:darkgoldenrod;
+}
+
+.hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    outline: 1px solid #494a4f;
+    border-radius: 1px;
+    border: none;
+} 
+
+.error {
+    position: absolute;
+    top: 140px;
+    left: 50px;
+    background-color: #97AABD;
+}
+
+.resultItem:hover{
+    text-decoration: underline;
+}
