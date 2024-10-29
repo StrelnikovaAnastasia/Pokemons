@@ -104,22 +104,31 @@ class Pokemons extends HTMLElement {
         changeVisible(this.buttonList, this.form, this.search);
         changeVisible(this.buttonSearch, this.search, this.form);
 
+        this.itemsPerPage = 25;
+        this.getData();
     }
 
-    async getPokemons() {
+    async getData() {
+        const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
+        this.items = data.results;
+    }
+
+    async getPokemons(page) {
         const pokemons = [];
-        let data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
-        let results = data.results;
-        for (let poke of results) {
-            let promise = await fetch(poke.url).then(res => res.json());
+        const startIndex = page * this.itemsPerPage + 1;
+        const endIndex = startIndex + this.itemsPerPage;
+
+        for (let i = startIndex; i < endIndex; i++) {
+            let promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => res.json());
             pokemons.push(promise);
         }
+
         this.pokemons = pokemons;
         return pokemons;
     }
 
-    async createPokemonCards() {
-        const pokemons = await this.getPokemons();
+    async createPokemonCards(currentPage) {
+        const pokemons = await this.getPokemons(currentPage);
 
         pokemons.forEach((element, id) => {
             const card = document.createElement("div");
@@ -153,40 +162,28 @@ document.body.appendChild(myElement);
 document.addEventListener("submit", (e) => { e.preventDefault() });
 
 document.addEventListener('DOMContentLoaded', async function () {
-    await myElement.createPokemonCards();
+    await myElement.createPokemonCards(0);
 
-    const content = document.querySelector('.cards');
-    const itemsPerPage = 12;
     let currentPage = 0;
 
-    const items = Array.from(content.getElementsByTagName('div'));
-
-    function showPage(page) {
-        const startIndex = page * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        items.forEach((item, index) => {
-            item.classList.toggle('hidden', index < startIndex || index >= endIndex);
-        });
-        updateActiveButtonStates();
-    }
-
     function createPageButtons() {
-        const totalPages = Math.ceil(items.length / itemsPerPage);
+        const totalPages = Math.ceil(myElement.items.length / myElement.itemsPerPage);
         const paginationContainer = document.createElement('div');
         const paginationDiv = document.body.appendChild(paginationContainer);
         paginationContainer.classList.add('pagination');
 
-        for (let i = 0; i < totalPages; i++) {
+        for (let i = 0; i < totalPages - 1; i++) {
             const pageButton = document.createElement('button');
             pageButton.textContent = i + 1;
             pageButton.addEventListener('click', () => {
                 currentPage = i;
-                showPage(currentPage);
+                myElement.createPokemonCards(currentPage);
+                myElement.cards.innerHTML = '';
                 window.scrollTo(0, 0);
                 updateActiveButtonStates();
             });
 
-            content.appendChild(paginationContainer);
+            myElement.form.appendChild(paginationContainer);
             paginationDiv.appendChild(pageButton);
         }
     }
@@ -203,32 +200,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     createPageButtons();
-    showPage(currentPage);
 });
 
 const clean = () => {
-    myElement.list.innerHTML = "";
     myElement.error.innerHTML = "";
     myElement.findAnswer.classList.add("hidden");
 }
 
 myElement.inputSearch.addEventListener("input", () => {
     const value = myElement.inputSearch.value.trim();
-    if (value.length < 3) {
-        clean();
-        return;
-    }
-    setList(myElement.pokemons);
+    myElement.list.innerHTML = "";
+    clean();
+    if (value.length < 3) return;
+    setList(myElement.items);
 
     function setList(results) {
-        clean();
         let flag = false;
         for (const pokemon of results) {
             const name = pokemon.name.trim();
             myElement.list.classList.remove("invisible");
             if (name.includes(value)) {
-                myElement.error.innerHTML = "";
-                myElement.findAnswer.classList.add("hidden");
+                clean();
                 const resultItem = document.createElement("li");
                 resultItem.classList.add("resultItem");
                 resultItem.textContent = name;
