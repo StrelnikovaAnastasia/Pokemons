@@ -1,151 +1,50 @@
-class Pokemons extends HTMLElement {
-    constructor() {
-        super();
-        const $ = document;
-        this.divForm = $.createElement("div");
-        this.divForm.classList.add("div_form");
+const itemsPerPage = 25;
+const buttonsPerPage = 3;
 
-        this.form = $.createElement("form");
-        this.form.classList.add("form");
+async function getData() {
+    const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
+    return data.results;
+}
 
-        this.head = $.createElement("div");
-        this.head.classList.add("head");
+async function getPokemons(page) {
+    const pokemons = [];
+    const startIndex = page * itemsPerPage + 1;
+    const endIndex = startIndex + itemsPerPage;
 
-        this.header = $.createElement("header");
-        this.header.classList.add("header");
-
-        this.buttonSearchLabel = $.createElement("label");
-        this.buttonSearch = $.createElement("button");
-        this.buttonSearch.classList.add("bx-search", "bx", "bx-md", "button", "buttonSwitch");
-
-        this.h2 = $.createElement("h2");
-        this.h2.textContent = "Покемоны";
-
-        this.cards = $.createElement("div");
-        this.cards.classList.add("cards");
-
-        this.br = $.createElement("br");
-
-        this.search = $.createElement("form");
-        this.search.classList.add("form", "invisible");
-
-        this.list = $.createElement("ul");
-        this.list.classList.add("list", "invisible");
-
-        this.headSearch = $.createElement("div");
-        this.headSearch.classList.add("head");
-
-        this.titleSearch = $.createElement("header");
-        this.titleSearch.classList.add("header");
-        this.titleSearch.textContent = "Поиск";
-
-        this.brSearch = $.createElement("br");
-
-        this.buttonListLabel = $.createElement("label");
-        this.buttonList = $.createElement("button");
-        this.buttonList.classList.add("bx-list-ul", "bx", "bx-lg", "button", "buttonSwitch");
-
-        this.inputSearchLabel = $.createElement("label");
-        this.inputSearch = $.createElement("input");
-        this.inputSearch.classList.add("input");
-        this.inputSearch.placeholder = "поиск..."
-
-        this.error = $.createElement("div");
-
-        this.findAnswer = $.createElement("form");
-        this.findAnswer.classList.add("findAnswer", "hidden");
-
-        this.headFindAnswer = $.createElement("div");
-        this.headFindAnswer.classList.add("headFindAnswer");
-
-        this.headFindAnswer__header = $.createElement("header");
-        this.headFindAnswer__header.classList.add("header");
-
-        this.brFind = $.createElement("br");
-
-        this.headFindAnswer__span = $.createElement("span");
-        this.headFindAnswer__span.classList.add("span");
-
-        this.imgFindAnswer = $.createElement("img");
-        this.imgFindAnswer.classList.add("img");
-
-        this.divForm.appendChild(this.form);
-        this.divForm.appendChild(this.search);
-        this.divForm.appendChild(this.list);
-        this.divForm.appendChild(this.findAnswer);
-
-        this.form.appendChild(this.head);
-        this.head.appendChild(this.header);
-        this.head.appendChild(this.buttonSearchLabel);
-        this.buttonSearchLabel.appendChild(this.buttonSearch);
-        this.form.appendChild(this.cards);
-        this.form.appendChild(this.br);
-        this.header.appendChild(this.h2);
-        this.search.appendChild(this.headSearch);
-        this.search.appendChild(this.brSearch);
-        this.headSearch.appendChild(this.titleSearch);
-        this.headSearch.appendChild(this.buttonListLabel);
-        this.buttonListLabel.appendChild(this.buttonList);
-
-        this.search.appendChild(this.inputSearchLabel);
-        this.search.appendChild(this.error);
-        this.search.appendChild(this.list);
-        this.search.appendChild(this.findAnswer);
-        this.inputSearchLabel.appendChild(this.inputSearch);
-
-        this.findAnswer.appendChild(this.headFindAnswer);
-        this.findAnswer.appendChild(this.imgFindAnswer);
-        this.headFindAnswer.appendChild(this.headFindAnswer__header);
-        this.headFindAnswer.appendChild(this.brFind);
-        this.headFindAnswer.appendChild(this.headFindAnswer__span);
-
-        $.body.appendChild(this.divForm);
-
-        changeVisible(this.buttonList, this.form, this.search);
-        changeVisible(this.buttonSearch, this.search, this.form);
-
-        this.itemsPerPage = 25;
-        this.getData();
+    for (let i = startIndex; i < endIndex; i++) {
+        let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => res.json());
+        pokemons.push(pokemon);
     }
+    return pokemons;
+}
 
-    async getData() {
-        const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
-        this.items = data.results;
-    }
+async function createPokemonCards(currentPage) {
+    const pokemons = await getPokemons(currentPage);
 
-    async getPokemons(page) {
-        const pokemons = [];
-        const startIndex = page * this.itemsPerPage + 1;
-        const endIndex = startIndex + this.itemsPerPage;
-
-        for (let i = startIndex; i < endIndex; i++) {
-            let promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => res.json());
-            pokemons.push(promise);
-        }
-
-        this.pokemons = pokemons;
-        return pokemons;
-    }
-
-    async createPokemonCards(currentPage) {
-        const pokemons = await this.getPokemons(currentPage);
-
-        pokemons.forEach((element, id) => {
-            const card = document.createElement("div");
-            const img = document.createElement("img");
-            img.classList.add("img");
-            const span = document.createElement("span");
-            span.classList.add("span");
-            card.classList.add("card");
-            card.id = ++id;
-            this.cards.appendChild(card);
-            card.appendChild(span);
-            card.appendChild(img);
-            span.textContent = element.name;
-            img.src = element.sprites.front_default;
-        });
-    }
-
+    pokemons.forEach((element, index) => {
+        const card = document.createElement("div");
+        const img = document.createElement("img");
+        img.classList.add("img");
+        const buttonBigCard = document.createElement("button");
+        buttonBigCard.classList.add("span");
+        buttonBigCard.addEventListener("click", async () => {
+            document.querySelector(".bigCard").classList.remove("hidden");
+            document.querySelector("#headerBigCard").textContent = element.name;
+            document.querySelector("#spanBigCard").textContent = "base experience: " + element.base_experience
+                + '\r\n' + "weight: " + element.weight;
+            document.querySelector("#imgBigCard").src = element.sprites.front_default;
+        })
+        document.querySelector(".closeButton").addEventListener("click", () => {
+            document.querySelector(".bigCard").classList.add("hidden");
+        })
+        card.classList.add("card");
+        card.id = ++index;
+        document.querySelector(".cards").appendChild(card);
+        card.appendChild(buttonBigCard);
+        card.appendChild(img);
+        buttonBigCard.textContent = element.name;
+        img.src = element.sprites.front_default;
+    });
 }
 
 const changeVisible = (button, remove, add) => {
@@ -155,83 +54,120 @@ const changeVisible = (button, remove, add) => {
     })
 }
 
-customElements.define("my-element", Pokemons);
-myElement = document.createElement("my-element");
-document.body.appendChild(myElement);
+let buttonList = document.querySelector(".bx-list-ul");
+let buttonSearch = document.querySelector(".bx-search");
+let form = document.querySelector("#form");
+let search = document.querySelector(".form");
+
+changeVisible(buttonList, form, search);
+changeVisible(buttonSearch, search, form);
 
 document.addEventListener("submit", (e) => { e.preventDefault() });
 
 document.addEventListener('DOMContentLoaded', async function () {
-    await myElement.createPokemonCards(0);
+    await createPokemonCards(0);
 
-    let currentPage = 0;
+    async function createPageButtons() {
+        let items = await getData();
+        const totalPages = Math.ceil(items.length / itemsPerPage);
 
-    function createPageButtons() {
-        const totalPages = Math.ceil(myElement.items.length / myElement.itemsPerPage);
-        const paginationContainer = document.createElement('div');
-        const paginationDiv = document.body.appendChild(paginationContainer);
-        paginationContainer.classList.add('pagination');
-
-        for (let i = 0; i < totalPages - 1; i++) {
-            const pageButton = document.createElement('button');
-            pageButton.textContent = i + 1;
+        function openList(pageButton) {
             pageButton.addEventListener('click', () => {
-                currentPage = i;
-                myElement.createPokemonCards(currentPage);
-                myElement.cards.innerHTML = '';
+                if (!pageButton.textContent) return;
+                let pro = document.querySelector(".bx-loader-circle");
+                if (pro) pro.remove();
+                let currentPageButton = Number(pageButton.textContent) - 1;
+                const load = document.createElement("i");
+                load.classList.add("bx", "bx-loader-circle", "bx-lg", "load");
+                document.querySelector(".forLoad").appendChild(load);
+                createPokemonCards(currentPageButton).then( () => {
+                    document.querySelector(".forLoad").classList.add("hidden");
+                });
+                document.querySelector(".cards").innerHTML = '';
                 window.scrollTo(0, 0);
-                updateActiveButtonStates();
+                document.querySelector(".forLoad").classList.remove("hidden");
             });
-
-            myElement.form.appendChild(paginationContainer);
-            paginationDiv.appendChild(pageButton);
         }
+
+        const pageButton = Array.from(document.querySelector('.btn').getElementsByClassName("button"));
+        pageButton.forEach((item) => openList(item));
+
+        document.querySelector(".bxs-chevron-right").addEventListener("click", () => {
+            let currentPageButton = Number(document.querySelector(".btn").lastElementChild.textContent);
+            let whenEnd = currentPageButton + buttonsPerPage;
+            changeOptionButton(currentPageButton, whenEnd, totalPages, pageButton);
+        })
+
+        document.querySelector(".bxs-chevron-left").addEventListener("click", () => {
+            let whenEnd = Number(document.querySelector(".btn").firstElementChild.textContent) - 1;
+            if (whenEnd == 0) {
+                whenEnd = totalPages
+            }
+            let currentPageButton = whenEnd - buttonsPerPage;
+            changeOptionButton(currentPageButton, whenEnd, totalPages, pageButton);
+        })
     }
 
-    function updateActiveButtonStates() {
-        const pageButtons = document.querySelectorAll('.pagination button');
-        pageButtons.forEach((button, index) => {
-            if (index === currentPage) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
-        });
-    }
+    // function updateActiveButtonStates(i) {
+    //     const pageButtons = Array.from(document.querySelector('.btn').getElementsByClassName("button"));
+    //     pageButtons.forEach((button) => {
+    //         console.log(Number(button.textContent))
+    //         console.log((currentPage));
+
+    //         if (Number(button.textContent) === currentPage) {
+    //             button.classList.add('active');
+    //         } else {
+    //             button.classList.remove('active');
+    //         }
+    //     });
+    // }
 
     createPageButtons();
 });
 
-const clean = () => {
-    myElement.error.innerHTML = "";
-    myElement.findAnswer.classList.add("hidden");
+function changeOptionButton(currentPageButton, whenEnd, totalPages, pageButton) {
+    for (let i = currentPageButton; i < whenEnd; i++) {
+        if (i + 1 < totalPages) {
+            pageButton[i - currentPageButton].textContent = i + 1;
+        }
+        else {
+            pageButton[i - currentPageButton].textContent = "";
+        }
+    }
 }
 
-myElement.inputSearch.addEventListener("input", () => {
-    const value = myElement.inputSearch.value.trim();
-    myElement.list.innerHTML = "";
+const clean = () => {
+    document.querySelector("#error").innerHTML = "";
+    document.querySelector(".findAnswer").classList.add("hidden");
+}
+
+let inputSearch = document.querySelector(".input");
+inputSearch.addEventListener("input", async () => {
+    const value = inputSearch.value.trim();
+    document.querySelector(".list").innerHTML = "";
     clean();
     if (value.length < 3) return;
-    setList(myElement.items);
+    let items = await getData();
+    setList(items);
 
     function setList(results) {
         let flag = false;
         for (const pokemon of results) {
             const name = pokemon.name.trim();
-            myElement.list.classList.remove("invisible");
+            document.querySelector(".list").classList.remove("invisible");
             if (name.includes(value)) {
                 clean();
                 const resultItem = document.createElement("li");
                 resultItem.classList.add("resultItem");
                 resultItem.textContent = name;
-                myElement.list.appendChild(resultItem);
+                document.querySelector(".list").appendChild(resultItem);
                 resultItem.addEventListener("click", async () => {
-                    myElement.findAnswer.classList.remove("hidden");
+                    document.querySelector(".findAnswer").classList.remove("hidden");
                     let infoPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`).then(res => res.json());
-                    myElement.headFindAnswer__header.textContent = infoPokemon.name;
-                    myElement.headFindAnswer__span.textContent = "base experience: " + infoPokemon.base_experience
+                    document.querySelector("#headerSearch").textContent = infoPokemon.name;
+                    document.querySelector("#spanSearch").textContent = "base experience: " + infoPokemon.base_experience
                         + '\r\n' + "weight: " + infoPokemon.weight;
-                    myElement.imgFindAnswer.src = infoPokemon.sprites.front_default;
+                    document.querySelector("#imgSearch").src = infoPokemon.sprites.front_default;
                 })
                 flag = true;
             }
@@ -240,7 +176,7 @@ myElement.inputSearch.addEventListener("input", () => {
             const errorItem = document.createElement("span");
             errorItem.classList.add("error");
             errorItem.textContent = "Ничего не найдено, убедитесь, что вы пишите на английском";
-            myElement.error.appendChild(errorItem);
+            document.querySelector("#error").appendChild(errorItem);
         }
 
     }

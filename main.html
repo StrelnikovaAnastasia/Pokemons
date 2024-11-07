@@ -6,6 +6,72 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <div id = "divForm">
+        <form id = "form">
+            <div class = "head">
+                <header class = "header">
+                    <h2>Pokemons</h2>
+                </header>
+                <label>
+                    <button class = "bx-search bx bx-md button buttonSwitch"></button>
+                </label>
+            </div>
+            <div class = "cards"></div>
+            <br>
+            <div class = "bigCard hidden">
+                <div class = "sectionBigCard">
+                    <header class = "header" id = "headerBigCard"></header>
+                    <button class = "button closeButton bx bx-x-circle"></button>
+                </div>
+                <div class = "sectionBigCard">
+                    <span class = "span" id = "spanBigCard"></span>
+                    <img class = "img" id = "imgBigCard">
+                </div>
+            </div>
+            <div class = "pagination">
+                <label>
+                    <button class = "bx bx-s bxs-chevron-left button"></button>
+                </label>
+                <div class = "btn">
+                    <label>
+                        <button class = "button">1</button>
+                    </label>
+                    <label>
+                        <button class = "button">2</button>
+                    </label>
+                    <label>
+                        <button class = "button">3</button>
+                    </label>
+                </div>
+                <label>
+                    <button class = "bx bx-s bxs-chevron-right button"></button>
+                </label>
+            </div>
+            <div class = "forLoad"></div>
+        </form>
+        <form class = "form invisible">
+            <div class = "head">
+                <header class = "header">Search</header>
+                <label>
+                    <button class = "bx-list-ul bx bx-lg button buttonSwitch"></button>
+                </label>
+            </div>
+            <br>
+            <label>
+                <input class = "input" placeholder = "search...">
+            </label>
+            <div id = "error"></div>
+            <ul class = "list invisible"></ul>
+            <section class = "findAnswer hidden">
+                <div class = "headFindAnswer">
+                    <header class = "header" id = "headerSearch"></header>
+                    <br>
+                    <span class = "span" id = "spanSearch"></span>
+                </div>
+                <img class = "img" id = "imgSearch">
+            </section>
+        </form>
+    </div>
     <script src = "index.js"></script>
 </body>
 </html>
