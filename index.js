@@ -25,9 +25,16 @@ async function createPokemonCards(currentPage) {
         const card = document.createElement("div");
         const img = document.createElement("img");
         img.classList.add("img");
-        const buttonBigCard = document.createElement("button");
-        buttonBigCard.classList.add("span");
-        buttonBigCard.addEventListener("click", async () => {
+        const span = document.createElement("span");
+        span.classList.add("span");
+        card.classList.add("card");
+        card.id = ++index;
+        document.querySelector(".cards").appendChild(card);
+        card.appendChild(span);
+        card.appendChild(img);
+        span.textContent = element.name;
+        img.src = element.sprites.front_default;
+        card.addEventListener("click", async () => {
             document.querySelector(".bigCard").classList.remove("hidden");
             document.querySelector("#headerBigCard").textContent = element.name;
             document.querySelector("#spanBigCard").textContent = "base experience: " + element.base_experience
@@ -37,13 +44,6 @@ async function createPokemonCards(currentPage) {
         document.querySelector(".closeButton").addEventListener("click", () => {
             document.querySelector(".bigCard").classList.add("hidden");
         })
-        card.classList.add("card");
-        card.id = ++index;
-        document.querySelector(".cards").appendChild(card);
-        card.appendChild(buttonBigCard);
-        card.appendChild(img);
-        buttonBigCard.textContent = element.name;
-        img.src = element.sprites.front_default;
     });
 }
 
@@ -66,7 +66,8 @@ document.addEventListener("submit", (e) => { e.preventDefault() });
 
 document.addEventListener('DOMContentLoaded', async function () {
     await createPokemonCards(0);
-
+    var preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
     async function createPageButtons() {
         let items = await getData();
         const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const load = document.createElement("i");
                 load.classList.add("bx", "bx-loader-circle", "bx-lg", "load");
                 document.querySelector(".forLoad").appendChild(load);
-                createPokemonCards(currentPageButton).then( () => {
+                createPokemonCards(currentPageButton).then(() => {
                     document.querySelector(".forLoad").classList.add("hidden");
                 });
                 document.querySelector(".cards").innerHTML = '';
@@ -107,20 +108,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             changeOptionButton(currentPageButton, whenEnd, totalPages, pageButton);
         })
     }
-
-    // function updateActiveButtonStates(i) {
-    //     const pageButtons = Array.from(document.querySelector('.btn').getElementsByClassName("button"));
-    //     pageButtons.forEach((button) => {
-    //         console.log(Number(button.textContent))
-    //         console.log((currentPage));
-
-    //         if (Number(button.textContent) === currentPage) {
-    //             button.classList.add('active');
-    //         } else {
-    //             button.classList.remove('active');
-    //         }
-    //     });
-    // }
 
     createPageButtons();
 });
@@ -157,6 +144,9 @@ inputSearch.addEventListener("input", async () => {
             document.querySelector(".list").classList.remove("invisible");
             if (name.includes(value)) {
                 clean();
+                document.querySelector("#headerSearch").textContent = "загрузка данных...";
+                document.querySelector("#spanSearch").textContent = "";
+                document.querySelector("#imgSearch").src = "";
                 const resultItem = document.createElement("li");
                 resultItem.classList.add("resultItem");
                 resultItem.textContent = name;
