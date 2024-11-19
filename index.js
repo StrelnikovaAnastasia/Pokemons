@@ -18,14 +18,14 @@ async function getPokemons(page) {
     return pokemons;
 }
 
-async function createPokemonCards(currentPage) {
+async function createPokemonCards(currentPage = 0) {
     const pokemons = await getPokemons(currentPage);
 
     pokemons.forEach((element, index) => {
         const card = document.createElement("div");
         const img = document.createElement("img");
-        img.classList.add("img");
         const span = document.createElement("span");
+        img.classList.add("img");
         span.classList.add("span");
         card.classList.add("card");
         card.id = ++index;
@@ -65,15 +65,16 @@ changeVisible(buttonSearch, search, form);
 document.addEventListener("submit", (e) => { e.preventDefault() });
 
 document.addEventListener('DOMContentLoaded', async function () {
-    await createPokemonCards(0);
+    await createPokemonCards();
     var preloader = document.getElementById('preloader');
     preloader.style.display = 'none';
     async function createPageButtons() {
         let items = await getData();
         const totalPages = Math.ceil(items.length / itemsPerPage);
-
         function openList(pageButton) {
+            let promise = null;
             pageButton.addEventListener('click', () => {
+                if (promise) return;
                 if (!pageButton.textContent) return;
                 let pro = document.querySelector(".bx-loader-circle");
                 if (pro) pro.remove();
@@ -81,9 +82,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const load = document.createElement("i");
                 load.classList.add("bx", "bx-loader-circle", "bx-lg", "load");
                 document.querySelector(".forLoad").appendChild(load);
-                createPokemonCards(currentPageButton).then(() => {
+                promise = createPokemonCards(currentPageButton);
+                promise.then(() => {
                     document.querySelector(".forLoad").classList.add("hidden");
-                });
+                }).finally(() => promise = null);
                 document.querySelector(".cards").innerHTML = '';
                 window.scrollTo(0, 0);
                 document.querySelector(".forLoad").classList.remove("hidden");
@@ -102,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.querySelector(".bxs-chevron-left").addEventListener("click", () => {
             let whenEnd = Number(document.querySelector(".btn").firstElementChild.textContent) - 1;
             if (whenEnd == 0) {
-                whenEnd = totalPages
+                whenEnd = totalPages;
             }
             let currentPageButton = whenEnd - buttonsPerPage;
             changeOptionButton(currentPageButton, whenEnd, totalPages, pageButton);
