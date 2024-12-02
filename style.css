@@ -11,10 +11,24 @@ body {
     height: 100vh;
 }
 
+@keyframes rotateByY {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(360deg);
+    }
+}
+
 #preloader {
+    height: 80px;
+    width: 65px;
+}
+
+.loader {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: rotateByY 2s infinite;
 }
 
 .invisible {
@@ -58,8 +72,8 @@ body {
     border-style: double;
     border-radius: 10px;
     border-color: darkgoldenrod;
-    width: 340px;
-    height: 340px;
+    width: 320px;
+    height: 320px;
     padding: 10px;
 }
 
@@ -67,6 +81,115 @@ body {
     border-color: white;
     box-shadow: inset 0px 0px 20px 8px darkgoldenrod, 
     0px 0px 20px 4px darkgoldenrod;
+}
+
+.typesPokemon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.type {
+    margin: 10px;
+    font-size: 18px;
+    font-style: oblique;
+    text-align: center;
+    padding-top: 3px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 10px;
+}
+
+.grass {
+    color: black;
+    background-color: #68b060;
+}
+
+.poison {
+    color: white;
+    background-color: #c47ede;
+}
+
+.fire {
+    color: white;
+    background-color: #d92424;
+}
+
+.flying {
+    color: black;
+    background-color: #28cbda;
+}
+
+.water {
+    color: white;
+    background-color: #258abd;
+}
+
+.bug {
+    color: white;
+    background-color: #2c702c;
+}
+
+.normal {
+    color: black;
+    background-color: #858f85;
+}
+
+.electric {
+    color: black;
+    background-color: #f0e633;
+}
+
+.ground {
+    color: white;
+    background-color: #87660b;
+}
+
+.fairy {
+    color: white;
+    background-color: #c6129c;
+}
+
+.fighting {
+    color: white;
+    background-color: #370a0d;
+}
+
+.psychic {
+    color: white;
+    background-color: #260a37;
+}
+
+.rock {
+    color: white;
+    background-color: #343235;
+}
+
+.steel {
+    color: white;
+    background-color: #66617d;
+}
+
+.ice {
+    color: black;
+    background-color: white;
+}
+
+.ghost {
+    color: black;
+    background-color: rgb(198, 177, 177);
+}
+
+.dragon {
+    color: black;
+    background-color: rgb(229, 137, 8);
+}
+
+.dark {
+    color: white;
+    background-color: black;
 }
 
 .findAnswer {
@@ -91,7 +214,7 @@ body {
 
 .bigCard {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 80px;
@@ -99,7 +222,7 @@ body {
     border-radius: 10px;
     border-color: darkgoldenrod;
     background-color: #2F4454;
-    width: 600px;
+    width: 620px;
     height: 360px;
     padding: 10px;
     position: fixed;
@@ -110,7 +233,56 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.specifications {
+    display: flex;
+    top: 0;
+    justify-content: center;
+    height: 90px;
+    width: 320px;
+    margin: 7px;
+    background-color: darkgoldenrod;
+    border-radius: 5px;
+}
+
+.specificationsSection {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.specificationsHeader {
+    position: relative;
+    top: 0px;
+}
+
+.specificationsSpan {
+    margin: 10px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    height: 180px;
+    width: 320px;
+    margin: 7px;
+    background-color: #97AABD;
+    border-radius: 5px;
+}
+
+.statsSection {
+    margin: 5px;
+}
+
+.statsSpan {
+    float: right;
 }
 
 .closeButton {
@@ -130,6 +302,11 @@ body {
 }
 
 .img {
+    width: 230px;
+    height: 230px;
+}
+
+.imgBig {
     width: 300px;
     height: 300px;
 }

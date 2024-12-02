@@ -16,20 +16,67 @@
                     <button class = "bx-search bx bx-md button buttonSwitch"></button>
                 </label>
             </div>
-            <div id = "preloader">
-                <div class = "bx bx-loader-circle bx-lg load"></div>
+            <div class = "loader">
+                <img src = "pikachu.png" id = "preloader"></img>
             </div>
             <div class = "cards"></div>
             <br>
             <div class = "formBigCard">
                 <div class = "bigCard hidden">
                     <div class = "sectionBigCard">
-                        <header class = "header" id = "headerBigCard"></header>
-                        <button class = "button closeButton bx bx-x-circle"></button>
+                        <img class = "imgBig" id = "imgBigCard">
+                        <div class = "typesPokemon">
+                            <span id = "type1BigCard"></span>
+                            <span id = "type2BigCard"></span>
+                        </div>
                     </div>
                     <div class = "sectionBigCard">
-                        <span class = "span" id = "spanBigCard"></span>
-                        <img class = "img" id = "imgBigCard">
+                        <header class = "header" id = "headerBigCard"></header>
+                        <button class = "button closeButton bx bx-x-circle"></button>
+                        <div class = "specifications">
+                            <div class = "specificationsSection">
+                                <span class = "specificationsHeader">Height</span>
+                                <span class="specificationsSpan" id = "specificationsSpanHeight"></span>
+                            </div>
+                            <div class = "specificationsSection">
+                                <span class = "specificationsHeader">Experience</span>
+                                <span class="specificationsSpan" id = "specificationsSpanExperience"></span>
+                            </div>
+                            <div class = "specificationsSection">
+                                <span class = "specificationsHeader">Weight</span>
+                                <span class="specificationsSpan" id = "specificationsSpanWeight"></span>
+                            </div>
+                            <div class = "specificationsSection">
+                                <span class = "specificationsHeader">Abilitites</span>
+                                <span class="specificationsSpan" id = "specificationsSpanAbilities"></span>
+                            </div>
+                        </div>
+                        <div class = "stats">
+                            <div class = "statsSection">
+                                <span class = "statsHeader">HP</span>
+                                <span class="statsSpan" id = "statsSpanHP"></span>
+                            </div>
+                            <div class = "statsSection">
+                                <span class = "statsHeader">Attack</span>
+                                <span class="statsSpan" id = "statsSpanAttack"></span>
+                            </div>
+                            <div class = "statsSection">
+                                <span class = "statsHeader">Defence</span>
+                                <span class="statsSpan" id = "statsSpanDefence"></span>
+                            </div>
+                            <div class = "statsSection">
+                                <span class = "statsHeader">Special attack</span>
+                                <span class="statsSpan" id = "statsSpanSpecialAttack"></span>
+                            </div>
+                            <div class = "statsSection">
+                                <span class = "statsHeader">Special defence</span>
+                                <span class="statsSpan" id = "statsSpanSpecialDefence"></span>
+                            </div>
+                            <div class = "statsSection">
+                                <span class = "statsHeader">Speed</span>
+                                <span class="statsSpan" id = "statsSpanSpeed"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

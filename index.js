@@ -2,7 +2,7 @@ const itemsPerPage = 25;
 const buttonsPerPage = 3;
 
 async function getData() {
-    const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json());
+    const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json()).catch(() => alert("что-то пошло не так, обновите страницу"));
     return data.results;
 }
 
@@ -25,24 +25,73 @@ async function createPokemonCards(currentPage = 0) {
         const card = document.createElement("div");
         const img = document.createElement("img");
         const span = document.createElement("span");
+        const typesPokemon = document.createElement("div");
+        const type = document.createElement("span");
+        const weakness = document.createElement("span");
         img.classList.add("img");
         span.classList.add("span");
         card.classList.add("card");
+        type.classList.add("type");
+        weakness.classList.add("type");
+        typesPokemon.classList.add("typesPokemon")
         card.id = ++index;
         document.querySelector(".cards").appendChild(card);
         card.appendChild(span);
         card.appendChild(img);
-        span.textContent = element.name;
+        card.appendChild(typesPokemon);
+        typesPokemon.appendChild(type);
+        typesPokemon.appendChild(weakness);
+        let firstLetter = element.name.charAt(0).toUpperCase();
+        let lastWord = element.name.slice(1);
+        span.textContent = firstLetter + lastWord;
         img.src = element.sprites.front_default;
+        let types = [];
+        element.types.forEach((el, ind) => {
+            types[ind] = el.type.name;
+        })
+        type.classList.add(types[0]);
+        weakness.classList.add(types[1]);
+        type.textContent = types[0];
+        weakness.textContent = types[1];
+        types = null;
         card.addEventListener("click", async () => {
             document.querySelector(".bigCard").classList.remove("hidden");
-            document.querySelector("#headerBigCard").textContent = element.name;
-            document.querySelector("#spanBigCard").textContent = "base experience: " + element.base_experience
-                + '\r\n' + "weight: " + element.weight;
+            document.querySelector("#type1BigCard").className = " ";
+            document.querySelector("#type2BigCard").className = " ";
+            document.querySelector("#headerBigCard").textContent = firstLetter + lastWord;
             document.querySelector("#imgBigCard").src = element.sprites.front_default;
+            let types = [];
+            element.types.forEach((el, ind) => {
+                types[ind] = el.type.name;
+            })
+            document.querySelector("#type1BigCard").classList.add(types[0], "type");
+            document.querySelector("#type2BigCard").classList.add(types[1], "type");
+            document.querySelector("#type1BigCard").textContent = types[0];
+            document.querySelector("#type2BigCard").textContent = types[1];
+            types = null;
+            document.querySelector("#specificationsSpanHeight").textContent = element.height;
+            document.querySelector("#specificationsSpanExperience").textContent = element.base_experience;
+            document.querySelector("#specificationsSpanWeight").textContent = element.weight;
+            element.abilities.forEach((el) => {
+                if (el.is_hidden = "false") {
+                    document.querySelector("#specificationsSpanAbilities").textContent = el.ability.name;
+                }
+            });
+            let stats = [];
+            element.stats.forEach((el, ind) => {
+                stats[ind] = el.base_stat;
+            })
+            document.querySelector("#statsSpanHP").textContent = stats[0];
+            document.querySelector("#statsSpanAttack").textContent = stats[1];
+            document.querySelector("#statsSpanDefence").textContent = stats[2];
+            document.querySelector("#statsSpanSpecialAttack").textContent = stats[3];
+            document.querySelector("#statsSpanSpecialDefence").textContent = stats[4];
+            document.querySelector("#statsSpanSpeed").textContent = stats[5];
         })
         document.querySelector(".closeButton").addEventListener("click", () => {
             document.querySelector(".bigCard").classList.add("hidden");
+            document.querySelector("#type1BigCard").classList.remove;
+            document.querySelector("#type2BigCard").classList.remove;
         })
     });
 }
@@ -74,18 +123,19 @@ document.addEventListener('DOMContentLoaded', async function () {
         function openList(pageButton) {
             let promise = null;
             pageButton.addEventListener('click', () => {
+                preloader.style.display = 'flex';
                 if (promise) return;
                 if (!pageButton.textContent) return;
                 let pro = document.querySelector(".bx-loader-circle");
                 if (pro) pro.remove();
                 let currentPageButton = Number(pageButton.textContent) - 1;
-                const load = document.createElement("i");
-                load.classList.add("bx", "bx-loader-circle", "bx-lg", "load");
-                document.querySelector(".forLoad").appendChild(load);
                 promise = createPokemonCards(currentPageButton);
                 promise.then(() => {
                     document.querySelector(".forLoad").classList.add("hidden");
-                }).finally(() => promise = null);
+                }).finally(() => {
+                    promise = null
+                    preloader.style.display = 'none';
+                });
                 document.querySelector(".cards").innerHTML = '';
                 window.scrollTo(0, 0);
                 document.querySelector(".forLoad").classList.remove("hidden");
