@@ -3,6 +3,7 @@ const buttonsPerPage = 3;
 
 async function getData() {
     const data = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1026").then(res => res.json()).catch(() => alert("что-то пошло не так, обновите страницу"));
+    console.log(data.results)
     return data.results;
 }
 
@@ -46,6 +47,8 @@ async function createPokemonCards(currentPage = 0) {
         span.textContent = firstLetter + lastWord;
         img.src = element.sprites.front_default;
         let types = [];
+        console.log(element);
+    
         element.types.forEach((el, ind) => {
             types[ind] = el.type.name;
         })
@@ -53,7 +56,7 @@ async function createPokemonCards(currentPage = 0) {
         weakness.classList.add(types[1]);
         type.textContent = types[0];
         weakness.textContent = types[1];
-        types = null;
+        types = [];
         card.addEventListener("click", async () => {
             document.querySelector(".bigCard").classList.remove("hidden");
             document.querySelector("#type1BigCard").className = " ";
@@ -68,7 +71,7 @@ async function createPokemonCards(currentPage = 0) {
             document.querySelector("#type2BigCard").classList.add(types[1], "type");
             document.querySelector("#type1BigCard").textContent = types[0];
             document.querySelector("#type2BigCard").textContent = types[1];
-            types = null;
+            types = [];
             document.querySelector("#specificationsSpanHeight").textContent = element.height;
             document.querySelector("#specificationsSpanExperience").textContent = element.base_experience;
             document.querySelector("#specificationsSpanWeight").textContent = element.weight;
@@ -90,8 +93,6 @@ async function createPokemonCards(currentPage = 0) {
         })
         document.querySelector(".closeButton").addEventListener("click", () => {
             document.querySelector(".bigCard").classList.add("hidden");
-            document.querySelector("#type1BigCard").classList.remove;
-            document.querySelector("#type2BigCard").classList.remove;
         })
     });
 }
