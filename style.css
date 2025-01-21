@@ -31,10 +31,6 @@ body {
     animation: rotateByY 2s infinite;
 }
 
-.invisible {
-    display: none;
-}
-
 .headFindAnswer {
     display: flex;
     align-items: center;
