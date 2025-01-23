@@ -48,7 +48,7 @@ body {
 .header {
     color: darkgoldenrod;
     text-align: center;
-    font-size: 30px;
+    margin-bottom: 13px;
 }
 
 .cards {
@@ -63,7 +63,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 60px;
     cursor: pointer;
     border-style: double;
     border-radius: 10px;
@@ -92,10 +91,11 @@ body {
     font-style: oblique;
     text-align: center;
     padding-top: 3px;
-    height: 30px;
-    width: 80px;
     border: none;
     border-radius: 10px;
+    height: 30px;
+    width: 80px;
+
 }
 
 .grass {
@@ -218,11 +218,8 @@ body {
     border-radius: 10px;
     border-color: darkgoldenrod;
     background-color: #2F4454;
-    width: 620px;
-    height: 360px;
     padding: 10px;
     position: fixed;
-    top: 10px;
 }
 
 .sectionBigCard {
@@ -236,8 +233,6 @@ body {
     display: flex;
     top: 0;
     justify-content: center;
-    height: 90px;
-    width: 330px;
     margin: 7px;
     background-color: darkgoldenrod;
     border-radius: 5px;
@@ -266,8 +261,6 @@ body {
     align-items: left;
     justify-content: center;
     flex-direction: column;
-    height: 180px;
-    width: 330px;
     margin: 7px;
     background-color: #97AABD;
     border-radius: 5px;
@@ -286,13 +279,10 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    height: 30px;
-    width: 30px;
     top: 10px;
     right: 10px;
     border-radius: 50%;
     font-weight: bolder;
-    font-size: 15px;
     text-align: center;
 }
 
@@ -306,11 +296,6 @@ body {
 .img {
     width: 230px;
     height: 230px;
-}
-
-.imgBig {
-    width: 300px;
-    height: 300px;
 }
 
 .footer {
@@ -333,12 +318,7 @@ body {
 }
 
 .buttonSwitch {
-    height: 70px;
-    width: 70px;
-    border-radius: 30px;
     position: absolute;
-    top: 10px;
-    right: 10px;
 }
 
 .buttonSearch {
@@ -349,11 +329,9 @@ body {
 }
 
 .input {
-    height: 30px;
-    width: 90%;
+    width: 80%;
     margin: 20px;
     border-style: double;
-    border-radius: 10px;
     border-color: darkgoldenrod;
 }
 
@@ -384,7 +362,6 @@ body {
     flex-direction: row;
     position: fixed;
     bottom: 0px;
-    height: 80px;
 }
 
 .pagination button {
@@ -395,17 +372,12 @@ body {
     border-style: solid;
     border-radius: 3px;
     text-align: center;
-    height: 50px;
-    width: 50px;
-    font-weight: bolder;
-    font-size: medium;
 } 
 
 .error {
     position: absolute;
-    top: 140px;
-    left: 50px;
     background-color: #97AABD;
+    left: 50px;
 }
 
 .resultItem:hover{
@@ -426,4 +398,179 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (min-width: 777px) {
+    .pagination button {
+        height: 70px;
+        width: 70px;
+        font-size: 25px;
+    } 
+
+    .pagination {
+        height: 80px;
+    }
+
+    .card {
+        margin: 50px;
+    }
+
+    .bigCard {
+        width: 820px;
+        height: 560px;
+        top: 90px;
+    }
+
+    .specifications {
+        height: 120px;
+        width: 420px;
+    }
+
+    .specificationsHeader {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .specificationsSpan {
+        font-size: 20px;
+    }
+
+    .stats {
+        height: 260px;
+        width: 420px;
+    }
+
+    .statsHeader {
+        font-size: 24px;
+    }
+
+    .statsSpan {
+        font-size: 20px;
+    }
+
+    .imgBig {
+        width: 400px;
+        height: 400px;
+    }
+
+    .header {
+        font-size: 45px;
+    }
+
+    .closeButton {
+        height: 50px;
+        width: 50px;
+        font-size: 25px;
+    }
+
+    .buttonSwitch {
+        height: 90px;
+        width: 90px;
+        border-radius: 40px;
+        top: 20px;
+        right: 20px;
+    }
+
+    .input {
+        height: 40px;
+        border-radius: 15px;
+        font-size: 18px;
+    }
+
+    ul li{
+        font-size: 26px;
+    }
+
+    .error {
+        top: 165px;
+        font-size: 21px;
+    }
+}
+@media (min-width: 1124px) {
+    .pagination button {
+        height: 35px;
+        width: 35px;
+        font-size: 13px;
+    } 
+
+    .pagination {
+        height: 50px;
+    }
+
+    .card {
+        margin: 100px;
+    }
+
+    .bigCard {
+        width: 620px;
+        height: 360px;
+        top: 10px;
+    }
+
+    .specifications {
+        height: 90px;
+        width: 320px;
+    }
+
+    .specificationsHeader {
+        position: relative;
+        top: 0px;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .specificationsSpan {
+        font-size: 16px;
+    }
+
+    .stats {
+        height: 180px;
+        width: 320px;
+    }
+
+    .statsHeader {
+        font-size: 16px;
+    }
+
+    .statsSpan {
+        font-size: 16px;
+    }
+
+    .imgBig {
+        width: 300px;
+        height: 300px;
+    }
+
+    .header {
+        font-size: 30px;
+    }
+
+    .closeButton {
+        height: 30px;
+        width: 30px;
+        font-size: 15px;
+    }
+
+    .buttonSwitch {
+        height: 70px;
+        width: 70px;
+        border-radius: 30px;
+        top: 20px;
+        right: 20px;
+    }
+
+    .input {
+        height: 30px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    ul li{
+        font-size: 16px;
+    }
+
+    .error {
+        top: 140px;
+        font-size: 16px;
+    }
 }
