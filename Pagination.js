@@ -17,7 +17,9 @@ export class Pagination {
     }
 
     clickOnPageNumber(pageButton) {
+        let promise = null;
         pageButton.addEventListener('click', () => {
+            if (promise) return;
             let card = new Card();
             if (!pageButton.textContent) {
                 return;
@@ -33,9 +35,10 @@ export class Pagination {
 
             let currentPageButton = parseInt(pageButton.textContent) - 1;
 
-            card.createPokemonCards(currentPageButton)
+            promise = card.createPokemonCards(currentPageButton)
                 .catch(() => alert("Произошла ошибка, обновите страницу и попробуйте еще раз"))
                 .finally(() => {
+                    promise = null
                     card.preloader.hide();
                 });
 
