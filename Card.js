@@ -8,6 +8,18 @@ export class Card extends $ {
         super(selector);
     }
 
+    preloader = {
+        get: () => document.getElementById('preloader'),
+        hide: () => {
+            const elem = this.preloader.get();
+            if (elem) elem.style.display = 'none';
+        },
+        show: () => {
+            const elem = this.preloader.get();
+            if (elem) elem.style.display = 'flex';
+        }
+    }
+
     create() {
         this.card = document.createElement("div");
         this.img = document.createElement("img");
@@ -42,6 +54,15 @@ export class Card extends $ {
             card.clickOnCard(element);
         })
 
+    }
+
+    async createFindPokemonsCard(pokemons) {
+        pokemons.forEach((element, index) => {
+            let card = new Card();
+            card.create();
+            card.addInfo(element, index);
+            card.clickOnCard(element);
+        })
     }
 
     addInfo(element, index) {

@@ -13,13 +13,19 @@
                 <header class = "header">
                     <h2>Pokemons</h2>
                 </header>
-                <label>
-                    <button class = "bx-search bx bx-md button buttonSwitch"></button>
-                </label>
+                <div class = "search">
+                    <input placeholder = "search..." class = "inputSearch hidden">
+                    <label>
+                        <button class = "searchButton">
+                            <span class = "bx-search bx bx-s"></span>
+                        </button>
+                    </label>
+                </div>
             </div>
             <div class = "loader">
                 <img src = "./docs/assets/pikachu.png" id = "preloader"></img>
             </div>
+            <div class = "error hidden">По вашему запросу ничего не найдено</div>
             <div class = "cards"></div>
             <br>
             <div class = "formBigCard">
@@ -104,31 +110,5 @@
             </div>
             <div class = "forLoad"></div>
         </form>
-        <form class = "form hidden">
-            <div class = "head">
-                <header class = "header">Search</header>
-                <label>
-                    <button class = "bx-list-ul bx bx-lg button buttonSwitch"></button>
-                </label>
-            </div>
-            <br>
-            <label>
-                <input class = "input" placeholder = "search...">
-            </label>
-            <div id = "error"></div>
-            <ul class = "list hidden"></ul>
-            <div class = "formBigCard">
-                <section class = "findAnswer hidden">
-                    <div class = "headFindAnswer">
-                        <header class = "header" id = "headerSearch"></header>
-                        <br>
-                        <span class = "span" id = "spanSearch"></span>
-                    </div>
-                    <img class = "img" id = "imgSearch">
-                </section>
-            </div>
-        </form>
-    </div>
-    
 </body>
 </html>

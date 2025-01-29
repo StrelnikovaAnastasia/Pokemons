@@ -4,17 +4,6 @@ import { Card } from "./Card.js";
 
 export class Pagination {
     buttonsPerPage = 3;
-    preloader = {
-        get: () => document.getElementById('preloader'),
-        hide: () => {
-            const elem = this.preloader.get();
-            if (elem) elem.style.display = 'none';
-        },
-        show: () => {
-            const elem = this.preloader.get();
-            if (elem) elem.style.display = 'flex';
-        }
-    }
 
     async createPageButtons() {
         let infoPokemon = new Pokemons();
@@ -29,10 +18,11 @@ export class Pagination {
 
     clickOnPageNumber(pageButton) {
         pageButton.addEventListener('click', () => {
+            let card = new Card();
             if (!pageButton.textContent) {
                 return;
             }
-            this.preloader.show();
+            card.preloader.show();
 
             const forLoad = new $('.forLoad');
             const cards = new $('.cards');
@@ -44,12 +34,11 @@ export class Pagination {
 
             let currentPageButton = parseInt(pageButton.textContent) - 1;
 
-            let card = new Card();
             card.createPokemonCards(currentPageButton)
                 .then(() => forLoad.hide())
                 .catch(() => alert("Произошла ошибка, обновите страницу и попробуйте еще раз"))
                 .finally(() => {
-                    this.preloader.hide();
+                    card.preloader.hide();
                 });
 
             cards.clear();

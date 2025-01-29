@@ -1,5 +1,5 @@
 body {
-    background-color: #2F4454;
+    background-color: #001524;
 }
 
 #div_form {
@@ -46,9 +46,33 @@ body {
 }
 
 .header {
-    color: darkgoldenrod;
+    color: #ff7d00;
     text-align: center;
-    margin-bottom: 13px;
+}
+
+.search {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.inputSearch {
+    border-radius: 25px;
+    font-size: 26px; 
+}
+
+.searchButton {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    border-radius: 50%; 
+    color: white;
+    border-style: none;
+    background-color: #011321;
+} 
+
+.bx-search {
+    transform: scale(3);
 }
 
 .cards {
@@ -65,10 +89,8 @@ body {
     justify-content: center;
     cursor: pointer;
     border-style: double;
-    border-radius: 10px;
+    border-radius: 30px;
     border-color: darkgoldenrod;
-    width: 320px;
-    height: 320px;
     padding: 10px;
 }
 
@@ -87,15 +109,11 @@ body {
 
 .type {
     margin: 10px;
-    font-size: 18px;
     font-style: oblique;
     text-align: center;
     padding-top: 3px;
     border: none;
     border-radius: 10px;
-    height: 30px;
-    width: 80px;
-
 }
 
 .grass {
@@ -217,7 +235,7 @@ body {
     border-style: double;
     border-radius: 10px;
     border-color: darkgoldenrod;
-    background-color: #2F4454;
+    background-color: #001524;
     padding: 10px;
     position: fixed;
 }
@@ -282,20 +300,22 @@ body {
     top: 10px;
     right: 10px;
     border-radius: 50%;
+    border-style: none;
     font-weight: bolder;
     text-align: center;
 }
 
-.span {
-    font-style: oblique;
-    color: darkgoldenrod;
-    font-size: 25px;
-    white-space: pre;
+.error {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    background-color: #011321;
 }
 
-.img {
-    width: 230px;
-    height: 230px;
+.span {
+    color: #e7ddc2;
+    white-space: pre;
 }
 
 .footer {
@@ -313,8 +333,8 @@ body {
 }
 
 .button {
-    background-color:#97AABD;
-    color: #19181A;
+    background: none;
+    color: white;
 }
 
 .buttonSwitch {
@@ -362,23 +382,18 @@ body {
     flex-direction: row;
     position: fixed;
     bottom: 0px;
+    width: 100;
+    background-color: #011321;
 }
 
 .pagination button {
-    color: #19181A;
+    color: white;
     margin: 5px;
     cursor: pointer;
-    border-color: #19181A;
-    border-style: solid;
-    border-radius: 3px;
+    border-style: none;
     text-align: center;
+    font-weight: bolder;
 } 
-
-.error {
-    position: absolute;
-    background-color: #97AABD;
-    left: 50px;
-}
 
 .resultItem:hover{
     text-decoration: underline;
@@ -400,19 +415,27 @@ body {
     justify-content: center;
 }
 
-@media (min-width: 777px) {
+@media (min-width: 0px) {
     .pagination button {
-        height: 70px;
-        width: 70px;
-        font-size: 25px;
+        height: 90px;
+        width: 90px;
+        font-size: 32px;
     } 
 
     .pagination {
-        height: 80px;
+        height: 100px;
     }
 
     .card {
-        margin: 50px;
+        margin: 25px;
+        width: 400px;
+        height: 400px;
+    }
+
+    .type {
+        font-size: 30px;
+        height: 40px;
+        width: 120px;
     }
 
     .bigCard {
@@ -454,7 +477,7 @@ body {
     }
 
     .header {
-        font-size: 45px;
+        font-size: 64px;
     }
 
     .closeButton {
@@ -481,24 +504,39 @@ body {
         font-size: 26px;
     }
 
+    .img {
+        width: 290px;
+        height: 290px;
+    }
+
+    .span {
+        font-size: 42px;
+    }
+
+    .inputSearch {
+        width: 250px;
+        height: 40px;
+    }
+
     .error {
-        top: 165px;
-        font-size: 21px;
+        font-size: 26px;
     }
 }
 @media (min-width: 1124px) {
     .pagination button {
-        height: 35px;
-        width: 35px;
-        font-size: 13px;
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
     } 
 
     .pagination {
-        height: 50px;
+        height: 60px;
     }
 
     .card {
-        margin: 100px;
+        margin: 80px;
+        width: 350px;
+        height: 350px;
     }
 
     .bigCard {
@@ -542,7 +580,7 @@ body {
     }
 
     .header {
-        font-size: 30px;
+        font-size: 45px;
     }
 
     .closeButton {
@@ -552,9 +590,9 @@ body {
     }
 
     .buttonSwitch {
-        height: 70px;
-        width: 70px;
-        border-radius: 30px;
+        height: 90px;
+        width: 90px;
+        border-radius: 40px;
         top: 20px;
         right: 20px;
     }
@@ -570,7 +608,31 @@ body {
     }
 
     .error {
-        top: 140px;
-        font-size: 16px;
+        color: white;
+        font-size: 26px;
+    }
+
+    .type {
+        font-size: 18px;
+        height: 30px;
+        width: 80px;
+    }
+
+    .img {
+        width: 230px;
+        height: 230px;
+    }
+
+    .span {
+        font-size: 30px;
+    }
+
+    .inputSearch {
+        width: 380px;
+        height: 35px;
+    }
+
+    .error {
+        font-size: 26px;
     }
 }
