@@ -22,13 +22,6 @@ body {
     animation: rotateByY 2s infinite;
 }
 
-.headFindAnswer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
 .head {
     display: flex;
     align-items: center;
@@ -198,20 +191,6 @@ body {
     background-color: black;
 }
 
-.findAnswer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 80px;
-    border-style: double;
-    border-radius: 10px;
-    border-color: darkgoldenrod;
-    width: 600px;
-    height: 300px;
-    padding: 10px;
-}
-
 .form-big-card {
     display: flex;
     align-items: center;
@@ -310,13 +289,6 @@ body {
     white-space: pre;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #19181A;
-}
-
 .btn {
     display: flex;
     align-items: center;
@@ -327,28 +299,6 @@ body {
 .button {
     background: none;
     color: white;
-}
-
-.buttonSwitch {
-    position: absolute;
-}
-
-.buttonSearch {
-    height: 40px;
-    width: 60px;
-    margin: 20px;
-    border-radius: 10px;
-}
-
-.input {
-    width: 80%;
-    margin: 20px;
-    border-style: double;
-    border-color: darkgoldenrod;
-}
-
-.active {
-    background-color:darkgoldenrod;
 }
 
 .hidden {
@@ -386,20 +336,6 @@ body {
     text-align: center;
     font-weight: bolder;
 } 
-
-.resultItem:hover{
-    text-decoration: underline;
-}
-
-.list {
-    border-radius: 10px;
-    background-color: #97AABD;
-    cursor: pointer;
-}
-
-.load {
-    color: #19181A;
-}
 
 @media (min-width: 0px) {
     .pagination button {
