@@ -2,15 +2,6 @@ body {
     background-color: #001524;
 }
 
-#div_form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-}
-
 @keyframes rotateByY {
     from {
         transform: rotateY(0deg);
@@ -56,12 +47,13 @@ body {
     right: 20px;
 }
 
-.inputSearch {
+.search__input {
     border-radius: 25px;
     font-size: 26px; 
+    padding: 8px;
 }
 
-.searchButton {
+.search__button {
     width: 80px;
     height: 80px;
     text-align: center;
@@ -100,7 +92,7 @@ body {
     0px 0px 20px 4px darkgoldenrod;
 }
 
-.typesPokemon {
+.types {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,13 +212,13 @@ body {
     padding: 10px;
 }
 
-.formBigCard {
+.form-big-card {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.bigCard {
+.big-card {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -240,7 +232,7 @@ body {
     position: fixed;
 }
 
-.sectionBigCard {
+.section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -256,7 +248,7 @@ body {
     border-radius: 5px;
 }
 
-.specificationsSection {
+.specifications-section {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -264,12 +256,12 @@ body {
     margin: 10px;
 }
 
-.specificationsHeader {
+.specifications-section__header {
     position: relative;
     top: 0px;
 }
 
-.specificationsSpan {
+.specifications-section__span {
     margin: 10px;
     text-align: center;
 }
@@ -284,7 +276,7 @@ body {
     border-radius: 5px;
 }
 
-.statsSection {
+.stats-section {
     margin: 5px;
 }
 
@@ -292,7 +284,7 @@ body {
     float: right;
 }
 
-.closeButton {
+.close-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,7 +305,7 @@ body {
     background-color: #011321;
 }
 
-.span {
+.card__span {
     color: #e7ddc2;
     white-space: pre;
 }
@@ -369,7 +361,7 @@ body {
     z-index: -1;
 }
 
-.formPagination {
+.form-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -432,7 +424,7 @@ body {
         width: 120px;
     }
 
-    .bigCard {
+    .big-card {
         width: 820px;
         height: 560px;
         top: 90px;
@@ -443,12 +435,12 @@ body {
         width: 420px;
     }
 
-    .specificationsHeader {
+    .specifications-section__header {
         font-size: 24px;
         margin-bottom: 15px;
     }
 
-    .specificationsSpan {
+    .specifications-section__span {
         font-size: 20px;
     }
 
@@ -457,15 +449,15 @@ body {
         width: 420px;
     }
 
-    .statsHeader {
+    .stats-section__header {
         font-size: 24px;
     }
 
-    .statsSpan {
+    .stats-section__span {
         font-size: 20px;
     }
 
-    .imgBig {
+    .section__img {
         width: 400px;
         height: 400px;
     }
@@ -474,7 +466,7 @@ body {
         font-size: 64px;
     }
 
-    .closeButton {
+    .close-button {
         height: 50px;
         width: 50px;
         font-size: 30px;
@@ -498,16 +490,16 @@ body {
         font-size: 26px;
     }
 
-    .img {
+    .card__img {
         width: 290px;
         height: 290px;
     }
 
-    .span {
+    .card__span {
         font-size: 42px;
     }
 
-    .inputSearch {
+    .search__input {
         width: 250px;
         height: 40px;
     }
@@ -533,7 +525,7 @@ body {
         height: 350px;
     }
 
-    .bigCard {
+    .big-card {
         width: 620px;
         height: 360px;
         top: 10px;
@@ -544,14 +536,14 @@ body {
         width: 320px;
     }
 
-    .specificationsHeader {
+    .specifications-section__header {
         position: relative;
         top: 0px;
         font-size: 16px;
         margin-bottom: 5px;
     }
 
-    .specificationsSpan {
+    .specifications-section__span {
         font-size: 16px;
     }
 
@@ -560,15 +552,15 @@ body {
         width: 320px;
     }
 
-    .statsHeader {
+    .stats-section__header {
         font-size: 16px;
     }
 
-    .statsSpan {
+    .stats-section__span {
         font-size: 16px;
     }
 
-    .imgBig {
+    .section__img {
         width: 300px;
         height: 300px;
     }
@@ -577,7 +569,7 @@ body {
         font-size: 45px;
     }
 
-    .closeButton {
+    .close-button {
         height: 30px;
         width: 30px;
         font-size: 15px;
@@ -612,16 +604,16 @@ body {
         width: 80px;
     }
 
-    .img {
+    .card__img {
         width: 230px;
         height: 230px;
     }
 
-    .span {
+    .card__span {
         font-size: 30px;
     }
 
-    .inputSearch {
+    .search__input {
         width: 380px;
         height: 35px;
     }

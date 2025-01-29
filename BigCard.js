@@ -4,22 +4,22 @@ export class BigCard extends $ {
 
     constructor(selector) {
         super(selector);
-        this.bigCard_type1 = document.querySelector("#type1BigCard");
-        this.bigCard_type2 = document.querySelector("#type2BigCard");
-        this.bigCard_header = new $("#headerBigCard");
-        this.bigCard_img = new $("#imgBigCard");
+        this.bigCard_type1 = document.querySelector("#types__type-1");
+        this.bigCard_type2 = document.querySelector("#types__type-2");
+        this.bigCard_header = new $("#header-big-card");
+        this.bigCard_img = new $(".section__img");
 
-        this.specificationsSpanHeight = new $("#specificationsSpanHeight");
-        this.specificationsSpanExperience = new $("#specificationsSpanExperience");
-        this.specificationsSpanWeight = new $("#specificationsSpanWeight");
-        this.specificationsSpanAbilities = new $("#specificationsSpanAbilities");
+        this.specificationsSpanHeight = new $("#specifications-span-height");
+        this.specificationsSpanExperience = new $("#specifications-span-experience");
+        this.specificationsSpanWeight = new $("#specifications-span-weight");
+        this.specificationsSpanAbilities = new $("#specifications-span-abilities");
 
-        this.statsSpanHP = new $("#statsSpanHP");
-        this.statsSpanAttack = new $("#statsSpanAttack");
-        this.statsSpanDefence = new $("#statsSpanDefence");
-        this.statsSpanSpecialAttack = new $("#statsSpanSpecialAttack");
-        this.statsSpanSpecialDefence = new $("#statsSpanSpecialDefence");
-        this.statsSpanSpeed = new $("#statsSpanSpeed");
+        this.statsSpanHP = new $("#stats-span-hp");
+        this.statsSpanAttack = new $("#stats-span-attack");
+        this.statsSpanDefence = new $("#stats-span-defence");
+        this.statsSpanSpecialAttack = new $("#stats-span-special-attack");
+        this.statsSpanSpecialDefence = new $("#stats-span-special-defence");
+        this.statsSpanSpeed = new $("#stats-span-speed");
 
     }
 

@@ -1,18 +1,17 @@
 import { $ } from "./$.js";
 import { Pokemons } from "./Pokemons.js";
-import { BigCard } from "./BigCard.js";
 import { Card } from "./Card.js";
 
 export class Search {
     showSearch() {
-        document.querySelector(".searchButton").addEventListener("click", () => {
-            if (!document.querySelector(".inputSearch").value) {
-                document.querySelector(".inputSearch").classList.toggle("hidden");
+        document.querySelector(".search__button").addEventListener("click", () => {
+            if (!document.querySelector(".search__input").value) {
+                document.querySelector(".search__input").classList.toggle("hidden");
             }
         })
     }
     writeQuest() {
-        let inputSearch = document.querySelector(".inputSearch");
+        let inputSearch = document.querySelector(".search__input");
         inputSearch.addEventListener("input", async () => {
             const value = inputSearch.value.trim();
             if (value.length < 3) {

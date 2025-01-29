@@ -28,12 +28,12 @@ export class Card extends $ {
         this.type = document.createElement("span");
         this.weakness = document.createElement("span");
 
-        this.img.classList.add("img");
-        this.span.classList.add("span");
+        this.img.classList.add("card__img");
+        this.span.classList.add("card__span");
         this.card.classList.add("card");
         this.type.classList.add("type");
         this.weakness.classList.add("type");
-        this.typesPokemon.classList.add("typesPokemon");
+        this.typesPokemon.classList.add("types");
 
         this.card.appendChild(this.span);
         this.card.appendChild(this.img);
@@ -87,13 +87,13 @@ export class Card extends $ {
 
     clickOnCard(element) {
         this.card.addEventListener("click", async () => {
-            let bigCard = new BigCard(".bigCard");
+            let bigCard = new BigCard(".big-card");
 
             bigCard.show();
 
             bigCard.addInfo(element);
 
-            document.querySelector(".closeButton").addEventListener("click", () => {
+            document.querySelector(".close-button").addEventListener("click", () => {
                 bigCard.hide();
             })
         })

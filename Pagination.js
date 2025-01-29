@@ -19,6 +19,8 @@ export class Pagination {
     clickOnPageNumber(pageButton) {
         let promise = null;
         pageButton.addEventListener('click', () => {
+            let error = new $(".error");
+            error.hide();
             if (promise) return;
             let card = new Card();
             if (!pageButton.textContent) {
