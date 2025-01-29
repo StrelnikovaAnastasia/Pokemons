@@ -24,7 +24,6 @@ export class Pagination {
             }
             card.preloader.show();
 
-            const forLoad = new $('.forLoad');
             const cards = new $('.cards');
             let pro = document.querySelector(".bx-loader-circle");
 
@@ -35,7 +34,6 @@ export class Pagination {
             let currentPageButton = parseInt(pageButton.textContent) - 1;
 
             card.createPokemonCards(currentPageButton)
-                .then(() => forLoad.hide())
                 .catch(() => alert("Произошла ошибка, обновите страницу и попробуйте еще раз"))
                 .finally(() => {
                     card.preloader.hide();
@@ -43,7 +41,6 @@ export class Pagination {
 
             cards.clear();
             window.scrollTo(0, 0);
-            forLoad.show();
         })
     }
 

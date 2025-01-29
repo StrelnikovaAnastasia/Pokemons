@@ -403,12 +403,6 @@ body {
     color: #19181A;
 }
 
-.forLoad {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 @media (min-width: 0px) {
     .pagination button {
         height: 90px;
@@ -477,7 +471,7 @@ body {
     .closeButton {
         height: 50px;
         width: 50px;
-        font-size: 25px;
+        font-size: 30px;
     }
 
     .buttonSwitch {
