@@ -366,6 +366,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     width: 1px;
+    z-index: -1;
 }
 
 .formPagination {
