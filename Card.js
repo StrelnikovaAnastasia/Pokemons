@@ -80,7 +80,6 @@ export class Card extends $ {
         this.weakness.classList.add(types[1]);
         this.type.textContent = types[0];
         this.weakness.textContent = types[1];
-        types = [];
 
         this.card.id = ++index;
     }

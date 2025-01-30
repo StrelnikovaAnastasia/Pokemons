@@ -4,6 +4,7 @@ import { Card } from "./Card.js";
 
 export class Pagination {
     buttonsPerPage = 3;
+    promise;
 
     async createPageButtons() {
         let infoPokemon = new Pokemons();
@@ -17,15 +18,14 @@ export class Pagination {
     }
 
     clickOnPageNumber(pageButton) {
-        let promise = null;
         pageButton.addEventListener('click', () => {
-            let error = new $(".error");
-            error.hide();
-            if (promise) return;
-            let card = new Card();
+            if (this.promise) return;
             if (!pageButton.textContent) {
                 return;
             }
+            let error = new $(".error");
+            error.hide();
+            let card = new Card();
             card.preloader.show();
 
             const cards = new $('.cards');
@@ -37,10 +37,10 @@ export class Pagination {
 
             let currentPageButton = parseInt(pageButton.textContent) - 1;
 
-            promise = card.createPokemonCards(currentPageButton)
+            this.promise = card.createPokemonCards(currentPageButton)
                 .catch(() => alert("Произошла ошибка, обновите страницу и попробуйте еще раз"))
                 .finally(() => {
-                    promise = null
+                    this.promise = null
                     card.preloader.hide();
                 });
 

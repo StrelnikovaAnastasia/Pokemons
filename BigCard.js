@@ -42,8 +42,6 @@ export class BigCard extends $ {
         this.bigCard_type1.textContent = types[0];
         this.bigCard_type2.textContent = types[1];
 
-        types = [];
-
         this.specificationsSpanHeight.attr('textContent', element.height);
         this.specificationsSpanExperience.attr('textContent', element.base_experience);
         this.specificationsSpanWeight.attr('textContent', element.weight);
