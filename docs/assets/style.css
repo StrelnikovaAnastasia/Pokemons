@@ -47,18 +47,12 @@ body {
 }
 
 .search__button {
-    width: 80px;
-    height: 80px;
     text-align: center;
     border-radius: 50%; 
     color: white;
     border-style: none;
     background-color: #011321;
 } 
-
-.bx-search {
-    transform: scale(3);
-}
 
 .cards {
     display: flex;
@@ -440,6 +434,15 @@ body {
         height: 40px;
     }
 
+    .search__button {
+        width: 80px;
+        height: 80px;
+    } 
+
+    .bx-search {
+        transform: scale(3);
+    }
+
     .error {
         font-size: 26px;
     }
@@ -511,14 +514,6 @@ body {
         font-size: 15px;
     }
 
-    .buttonSwitch {
-        height: 90px;
-        width: 90px;
-        border-radius: 40px;
-        top: 20px;
-        right: 20px;
-    }
-
     .input {
         height: 30px;
         border-radius: 10px;
@@ -551,7 +546,16 @@ body {
 
     .search__input {
         width: 380px;
-        height: 35px;
+        height: 25px;
+    }
+
+    .search__button {
+        width: 60px;
+        height: 60px;
+    } 
+
+    .bx-search {
+        transform: scale(2.3);
     }
 
     .error {

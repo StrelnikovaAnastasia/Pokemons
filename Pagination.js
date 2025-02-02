@@ -43,10 +43,12 @@ export class Pagination {
                     this.promise = null
                     card.preloader.hide();
                 });
-
+                
             cards.clear();
             window.scrollTo(0, 0);
+            
         })
+        
     }
 
     clickOnArrow(pageButton, totalPages) {

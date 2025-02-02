@@ -3,20 +3,11 @@ export class Pokemons {
 
     async getByPage(pageNumber) {
         const pokemons = [];
-        const startIndex = pageNumber * this.itemsPerPage + 1;
-        const endIndex = startIndex + this.itemsPerPage;
-
-        for (let i = startIndex; i < endIndex; i++) {
-            let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`).then(res => res.json());
-            pokemons.push(pokemon);
-        }
+        let infoPokemons = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=25&offset=${pageNumber*25}/`).then(res => res.json());
+        infoPokemons.results.forEach(element => {
+            pokemons.push(fetch(element.url).then(res => res.json()));
+        });
         return pokemons;
-
-    }
-
-    async getById(id) {
-        let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`).then(res => res.json());
-        return pokemon;
     }
 
     async getAll() {

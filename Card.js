@@ -46,17 +46,17 @@ export class Card extends $ {
     async createPokemonCards(currentPage = 0) {
         let infoPokemon = new Pokemons();
         const pokemons = await infoPokemon.getByPage(currentPage);
-
         pokemons.forEach((element, index) => {
-            let card = new Card();
-            card.create();
-            card.addInfo(element, index);
-            card.clickOnCard(element);
+            element.then((pokemon) => {
+                let card = new Card();
+                card.create();
+                card.addInfo(pokemon, index);
+                card.clickOnCard(pokemon);
+            })
         })
-
     }
 
-    async createFindPokemonsCard(pokemons) {
+    createFindPokemonsCard(pokemons) {
         pokemons.forEach((element, index) => {
             let card = new Card();
             card.create();
