@@ -1,6 +1,6 @@
-import { Card } from "./Card.js";
-import { Pagination } from "./Pagination.js";
-import { Search } from "./Search.js";
+import { Card } from './Card.js';
+import { Pagination } from './Pagination.js';
+import { Search } from './Search.js';
 
 export class Page {
     constructor() {

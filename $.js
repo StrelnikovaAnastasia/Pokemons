@@ -2,15 +2,15 @@ export class $ {
     #element;
 
     constructor(selector) {
-        this.#element = document.querySelector(selector)
+        this.#element = document.querySelector(selector);
     }
 
     hide() {
-        this.#element.classList.add("hidden");
+        this.#element.classList.add('hidden');
     }
 
     show() {
-        this.#element.classList.remove("hidden");
+        this.#element.classList.remove('hidden');
     }
 
     clear() {
@@ -28,5 +28,4 @@ export class $ {
     appendChild(child) {
         this.#element.appendChild(child);
     }
-
 }

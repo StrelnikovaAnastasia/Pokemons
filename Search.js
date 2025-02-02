@@ -1,18 +1,22 @@
-import { $ } from "./$.js";
-import { Pokemons } from "./Pokemons.js";
-import { Card } from "./Card.js";
+import { $ } from './$.js';
+import { Pokemons } from './Pokemons.js';
+import { Card } from './Card.js';
 
 export class Search {
     showSearch() {
-        document.querySelector(".search__button").addEventListener("click", () => {
-            if (!document.querySelector(".search__input").value) {
-                document.querySelector(".search__input").classList.toggle("hidden");
-            }
-        })
+        document
+            .querySelector('.search__button')
+            .addEventListener('click', () => {
+                if (!document.querySelector('.search__input').value) {
+                    document
+                        .querySelector('.search__input')
+                        .classList.toggle('hidden');
+                }
+            });
     }
     writeQuest() {
-        let inputSearch = document.querySelector(".search__input");
-        inputSearch.addEventListener("input", async () => {
+        let inputSearch = document.querySelector('.search__input');
+        inputSearch.addEventListener('input', async () => {
             const value = inputSearch.value.trim();
             if (value.length < 3) {
                 return;
@@ -26,17 +30,20 @@ export class Search {
             let items = await infoPokemon.getAll();
 
             this.setList(items, value)
-                .catch(() => alert("Произошла ошибка, обновите страницу и попробуйте еще раз"))
+                .catch(() =>
+                    alert(
+                        'Произошла ошибка, обновите страницу и попробуйте еще раз'
+                    )
+                )
                 .finally(() => {
                     card.preloader.hide();
                 });
-
-        })
+        });
     }
 
     async setList(results, value) {
         let flag = false;
-        let error = new $(".error");
+        let error = new $('.error');
         let pokemonsFind = [];
         error.hide();
         for (const pokemon of results) {
@@ -49,7 +56,11 @@ export class Search {
         let infoPokemon = new Pokemons();
         let card = new Card();
         let resultInfo = await infoPokemon.getBySearch(pokemonsFind);
-        card.createFindPokemonsCard(resultInfo);
+        resultInfo.forEach((element) => {
+            element.then((pokemon) => {
+                card.createFindPokemonsCard(pokemon);
+            });
+        });
         if (!flag) {
             error.show();
         }

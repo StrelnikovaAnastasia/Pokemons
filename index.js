@@ -1,6 +1,7 @@
-import { Page } from "./Page.js";
+import { Page } from './Page.js';
 
-document.addEventListener("submit", (e) => { e.preventDefault() });
+document.addEventListener('submit', (e) => {
+    e.preventDefault();
+});
 
 new Page();
-
