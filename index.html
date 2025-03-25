@@ -5,7 +5,6 @@
     <link href = "./docs/assets/style.css" rel = "stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-    <script type = "module" src = "./index.js"></script>
 <body>
     <div id = "div-form">
         <form id = "form">
@@ -22,11 +21,11 @@
                     </label>
                 </div>
             </div>
-            <div class = "loader">
+            <!-- <div class = "loader">
                 <img src = "./docs/assets/pikachu.png" id = "preloader"></img>
-            </div>
+            </div> -->
             <div class = "error hidden">По вашему запросу ничего не найдено</div>
-            <div class = "cards"></div>
+            <dev-fragment-pokemons class = "cards"></dev-fragment-pokemons>
             <br>
             <div class = "form-big-card">
                 <div class = "big-card hidden">
@@ -87,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <div class = "form-pagination">
+            <dev-fragment-pagination class = "form-pagination">
                 <div class = "pagination">
                     <label>
                         <button class = "bx bx-s bxs-chevron-left button"></button>
@@ -107,7 +106,8 @@
                         <button class = "bx bx-s bxs-chevron-right button"></button>
                     </label>
                 </div>
-            </div>
+            </dev-fragment-pagination>
         </form>
+        <script type = "module" src = "./index/index_dev.js"></script>
 </body>
 </html>

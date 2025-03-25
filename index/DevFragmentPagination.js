@@ -1,21 +1,33 @@
-import { $ } from './index/$.js';
-import { Pokemons } from './Pokemons.js';
-import { Card } from './Card.js';
+import { DevFragment } from './DevFragment.js';
 
-export class Pagination {
+export class DevFragmentPagination extends DevFragment {
     buttonsPerPage = 3;
     promise;
 
+    constructor() {
+        super();
+    }
+
+    render(data) {
+        this.createPageButtons();
+    }
+
+    async load() {
+        const data = await fetch(
+            'https://pokeapi.co/api/v2/pokemon/?limit=1026'
+        ).then((res) => res.json());
+        return data.results;
+    }
+
     async createPageButtons() {
-        let infoPokemon = new Pokemons();
-        let items = await infoPokemon.getAll();
-        const totalPages = Math.ceil(items.length / infoPokemon.itemsPerPage);
+        const itemsPerPage = 25;
+        let items = await this.load();
+        const totalPages = Math.ceil(items.length / itemsPerPage);
 
         const pageButton = Array.from(
             document.querySelector('.btn').getElementsByClassName('button')
         );
         pageButton.forEach((item) => this.clickOnPageNumber(item));
-
         this.clickOnArrow(pageButton, totalPages);
     }
 
@@ -25,21 +37,11 @@ export class Pagination {
             if (!pageButton.textContent) {
                 return;
             }
-            let error = new $('.error');
-            error.hide();
-            let card = new Card();
-            card.preloader.show();
 
-            const cards = new $('.cards');
-            let pro = document.querySelector('.bx-loader-circle');
-
-            if (pro) {
-                pro.remove();
-            }
-
+            this.loader.startLoading();
             let currentPageButton = parseInt(pageButton.textContent) - 1;
-
-            this.promise = card
+            this.promise = document
+                .querySelector('.cards')
                 .createPokemonCards(currentPageButton)
                 .catch(() =>
                     alert(
@@ -48,10 +50,9 @@ export class Pagination {
                 )
                 .finally(() => {
                     this.promise = null;
-                    card.preloader.hide();
                 });
-
-            cards.clear();
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card) => card.remove());
             window.scrollTo(0, 0);
         });
     }
@@ -103,3 +104,4 @@ export class Pagination {
         }
     }
 }
+customElements.define('dev-fragment-pagination', DevFragmentPagination);

@@ -1,71 +1,40 @@
-import { Pokemons } from './Pokemons.js';
 import { BigCard } from './BigCard.js';
-import { $ } from './index/$.js';
+import { DevFragment } from './DevFragment.js';
 
-export class Card extends $ {
-    constructor(selector) {
-        super(selector);
+export class DevFragmentPokemon extends DevFragment {
+    constructor() {
+        super();
     }
 
-    preloader = {
-        get: () => document.getElementById('preloader'),
-        hide: () => {
-            const elem = this.preloader.get();
-            if (elem) elem.style.display = 'none';
-        },
-        show: () => {
-            const elem = this.preloader.get();
-            if (elem) elem.style.display = 'flex';
-        },
-    };
+    render(data) {
+        this.create();
+    }
 
     create() {
-        this.card = document.createElement('div');
         this.img = document.createElement('img');
+
         this.span = document.createElement('span');
         this.typesPokemon = document.createElement('div');
         this.type = document.createElement('span');
         this.weakness = document.createElement('span');
 
+        this.classList.add('card');
         this.img.classList.add('card__img');
         this.span.classList.add('card__span');
-        this.card.classList.add('card');
         this.type.classList.add('type');
         this.weakness.classList.add('type');
         this.typesPokemon.classList.add('types');
 
-        this.card.appendChild(this.span);
-        this.card.appendChild(this.img);
-        this.card.appendChild(this.typesPokemon);
+        this.appendChild(this.span);
+        this.appendChild(this.img);
+        this.appendChild(this.typesPokemon);
         this.typesPokemon.appendChild(this.type);
         this.typesPokemon.appendChild(this.weakness);
-        document.querySelector('.cards').appendChild(this.card);
-    }
-
-    async createPokemonCards(currentPage = 0) {
-        let infoPokemon = new Pokemons();
-        const pokemons = await infoPokemon.getByPage(currentPage);
-        pokemons.forEach((element) => {
-            element.then((pokemon) => {
-                let card = new Card();
-                card.create();
-                card.addInfo(pokemon);
-                card.clickOnCard(pokemon);
-            });
-        });
-    }
-
-    createFindPokemonsCard(pokemon) {
-        let card = new Card();
-        card.create();
-        card.addInfo(pokemon);
-        card.clickOnCard(pokemon);
     }
 
     addInfo(element) {
         let firstLetter = element.name.charAt(0).toUpperCase();
         let lastWord = element.name.slice(1);
-
         this.img.src = element.sprites.front_default;
         this.span.textContent = firstLetter + lastWord;
 
@@ -80,7 +49,7 @@ export class Card extends $ {
     }
 
     clickOnCard(element) {
-        this.card.addEventListener('click', async () => {
+        this.addEventListener('click', async () => {
             let bigCard = new BigCard('.big-card');
 
             bigCard.show();
@@ -95,3 +64,4 @@ export class Card extends $ {
         });
     }
 }
+customElements.define('dev-fragment-pokemon', DevFragmentPokemon);

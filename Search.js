@@ -1,4 +1,4 @@
-import { $ } from './$.js';
+import { $ } from './index/$.js';
 import { Pokemons } from './Pokemons.js';
 import { Card } from './Card.js';
 

@@ -1,6 +1,145 @@
-body {
+:root {
+    --color-grey: #c7c5c4;
+    --color-concrete: #828180;
+    --color-font-second: var(--color-concrete);
+    --color-font-third: var(--color-grey);
+    --color-element-font-second: var(--color-font-second);
+    --color-element-font-third: var(--color-font-third);
+  
+    --tiny-pixel: 1px;
+    --tiny-pixel: 1px;
+    --md-ref-typeface-plain: "Geologica";
+    --md-sys-shape-corner-full: 16px;
+  
+    --dev-header-height: 3.25rem;
+  
+    --dev-svg-height: 1rem;
+    --dev-svg-width: 1rem;
+  
+    --dev-svg-s-height: 1.125rem;
+    --dev-svg-s-width: 1.125rem;
+  
+    --dev-svg-m-height: 1.5rem;
+    --dev-svg-m-width: 1.5rem;
+  
+    --dev-svg-l-height: 1.75rem;
+    --dev-svg-l-width: 1.75rem;
+  
+    --dev-tab-padding: 0.6875rem;
+  
+    --dev-gap-m: 0.75rem;
+  
+    --dev-over-size: 100%;
+    --dev-half-size: 50%;
+    --dev-l-size: 20rem;
+    --dev-m-size: 10rem;
+    --dev-s-size: 2.625rem;
+    --dev-z-base: 0;
+    --dev-z-2: 2;
+    --dev-z-4: 4;
+    --dev-z-6: 6;
+    --dev-z-overlay: 8;
+    --dev-delay: 0.4s;
+    --dev-opacity: 0.3;
+    --dev-m-radius: 0.75rem;
+    --dev-l-radius: 1rem;
+    --dev-s-radius: 0.625rem;
+    --dev-sheet-radius: 1.75rem 1.75rem 0 0;
+    --dev-over-radius: 100rem;
+    --dev-s-padding: 0.25rem 0.5rem;
+    --dev-m-padding: 0.5rem 1rem;
+    --dev-l-padding: 1.5rem 2rem;
+  
+    --dev-s-single-padding: 0.25rem;
+    --dev-m-single-padding: 0.5rem;
+    --dev-xm-single-padding: 1rem;
+    --dev-l-single-padding: 1.5rem;
+    --dev-xl-single-padding: 2rem;
+  
+    --dynamic-sheet-height: 0%;
+    --dynamic-sheet-width: 100%;
+  
+    --dev-h1-font: "Geologica";
+    --dev-h1-size: 1.625rem;
+    --dev-h1-line-height: 2rem;
+    --dev-h1-weight: 600;
+    --dev-h2-font: "Geologica";
+    --dev-h2-size: 1.25rem;
+    --dev-h2-line-height: 1.5rem;
+    --dev-h2-weight: 600;
+    --dev-h3-font: "Geologica";
+    --dev-h3-size: 1rem;
+    --dev-h3-line-height: 1.25rem;
+    --dev-h3-weight: 600;
+    --dev-h4-font: "Geologica";
+    --dev-h4-size: 0.85rem;
+    --dev-h4-line-height: 1.25rem;
+    --dev-h4-weight: 500;
+    --dev-h5-font: "Geologica";
+    --dev-h5-size: 0.625rem;
+    --dev-h5-line-height: 1rem;
+    --dev-h5-weight: 600;
+    --dev-text-1-font: "Geologica";
+    --dev-text-1-size: 1rem;
+    --dev-text-1-line-height: 1.25rem;
+    --dev-text-1-weight: 300;
+    --dev-text-2-font: "Geologica";
+    --dev-text-2-size: 0.75rem;
+    --dev-text-2-line-height: 1rem;
+    --dev-text-2-weight: 300;
+    --dev-text-3-font: "Geologica";
+    --dev-text-3-size: 0.75rem;
+    --dev-text-3-line-height: 0.75rem;
+    --dev-text-3-weight: 400;
+    --dev-loader-size: 3rem;
+    --dev-loader-width: 6px;
+    --dev-loader-angle: 360deg;
+  }
+  
+  html {
+    font-family: Geologica;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-x pan-y;
+    min-height: 100%; /* prevent pinch-zoom at page bottom */
+    scroll-snap-type: none;
+    overscroll-behavior: none;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    scroll-snap-type: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  body {
+    overscroll-behavior-y: none;
+    scroll-snap-type: none;
+    margin: 0;
+    overscroll-behavior: contain;
+    overflow-y: scroll;
     background-color: #001524;
-}
+  }
+  
+  .dev-loader {
+    align-items: center;
+    display: none;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .load .dev-fragment {
+    display: none;
+  }
+  
+  .load .dev-loader {
+    display: flex;
+  }
 
 @keyframes rotateByY {
     from {
@@ -350,7 +489,7 @@ body {
     }
 
     .big-card {
-        width: 820px;
+        width: 900px;
         height: 560px;
         top: 90px;
     }
@@ -460,8 +599,8 @@ body {
     }
 
     .big-card {
-        width: 620px;
-        height: 360px;
+        width: 660px;
+        height: 380px;
         top: 10px;
     }
 
